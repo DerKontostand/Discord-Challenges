@@ -16,7 +16,9 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-public class DeathListener implements Listener {
+public class Utils implements Listener {
+    
+    //DEATH LISTENER////////////////////////////////////////////////////////////////////////////////////////
 
     static Plugin plugin;
     ScoreboardManager manager = Bukkit.getScoreboardManager();
@@ -80,8 +82,55 @@ public class DeathListener implements Listener {
 
     }
 
+    //CHAT LISTENER////////////////////////////////////////////////////////////////////////////////////////
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e){
+        if(e.getPlayer().getGameMode() == GameMode.CREATIVE) {
+            e.setFormat("§e" + e.getPlayer().getDisplayName() + "§8: §7" + e.getMessage());
+        }else if(e.getPlayer().getGameMode() == GameMode.SPECTATOR){
+            e.setFormat("§e" + e.getPlayer().getDisplayName() + "§8§o: §7§o" + e.getMessage());
+        }
+    }
+
+}
+
+    public BukkitRunnable getRunnable() {
+        return runnable;
+    }
+
+    public static void TimerModule(){
+        runnable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                Bukkit.getOnlinePlayers().forEach(player -> {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§6§l" + shortInteger(Main.time)));
+                });
 
 
+                Main.time++;
+            }
+        };
+        runnable.runTaskTimer(Main.getPlugin(), 0, 20);
 
+    }
+
+//ONLINE LISTENER////////////////////////////////////////////////////////////////////////////////////////
+
+    public static HashMap<Player, Player> onlinePlayers = new HashMap<>();
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e){
+        e.setJoinMessage("§a" + e.getPlayer().getName() + " §7hat den Server §abetreten");
+        onlinePlayers.put(e.getPlayer(), e.getPlayer());
+
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e){
+        e.setQuitMessage("§c" + e.getPlayer().getName() + " §7hat den Server §cverlassen");
+
+    }
+    
 
 }
