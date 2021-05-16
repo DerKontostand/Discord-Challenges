@@ -48,6 +48,9 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new LevelEqualsHealth(), this);
         Bukkit.getPluginManager().registerEvents(new WithoutInv(), this);
         Bukkit.getPluginManager().registerEvents(new NoInvDrop(), this);
+        
+        
+        Bukkit.getPluginManager().registerEvents(new Utils(), this);
 
                 new TimerScheduler().runTaskTimer(getPlugin(), 20L, 20L);
 
