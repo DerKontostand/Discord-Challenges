@@ -29,6 +29,12 @@ public class Main extends JavaPlugin {
     public static boolean effectperchunk = false;
     public static boolean higherperjump = false;
 
+    public static boolean Timer = false;
+    public static BukkitRunnable runnable;
+    public static String prefix = "§8[§5Kutils§8] ";
+    public static String error = "§8[§4ERROR§8]: ";
+    
+    
     @Override
     public void onEnable() {
 
