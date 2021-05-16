@@ -1,0 +1,10 @@
+name: Challenge
+version: 1.0
+main: de.deinkontostand.main.Main
+api-version: 1.13
+
+commands:
+  settings:
+  timer:
+  heal:
+  reset:
